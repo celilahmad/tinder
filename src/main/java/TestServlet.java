@@ -18,5 +18,6 @@ public class TestServlet extends HttpServlet {
         try (OutputStream os = resp.getOutputStream()) {
             Files.copy(Paths.get("src/main/resources/templates", "like-page.html"), os);
         }
+
     }
 }

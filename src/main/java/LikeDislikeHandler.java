@@ -4,22 +4,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LikeDislikeHandler extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        Map<String, Integer> value = new HashMap<>();
+        value.put("liked",0);
+        value.put("disliked", 0);
+
         PrintWriter out = resp.getWriter();
 
         if (req.getParameter("dislike") != null) {
+            value.put("disliked", value.get("disliked") + 1);
+            for (Map.Entry<String, Integer> entry : value.entrySet()) {
+                out.write(entry.getKey()+" : "+entry.getValue() + "\n");
+            }
 
-           out.write("Dislikeike pressed");
 
 
         } else if (req.getParameter("like") != null) {
-
-            out.write("like pressed");
+            value.put("liked", value.get("liked") + 1);
+            for (Map.Entry<String, Integer> entry : value.entrySet()) {
+                out.write(entry.getKey()+" : "+entry.getValue() + "\n");
+            }
         }
+
     }
 
     @Override
