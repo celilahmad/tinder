@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 public class StaticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String p = req.getPathInfo();
-        Path path = Paths.get("src/main/resources/templates/", p);
+        String s = req.getPathInfo();
+        Path path = Paths.get("src/main/resources/templates/", s);
         ServletOutputStream outputStream = resp.getOutputStream();
         Files.copy(path, outputStream);
     }

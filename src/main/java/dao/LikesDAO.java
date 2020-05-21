@@ -79,6 +79,6 @@ public class LikesDAO implements DAO<Like> {
 
     @Override
     public Like get(int id) {
-        return stream().filter(oneLike -> oneLike.getId() == id).collect(Collectors.toList()).get(0);
+        return likes.stream().filter(oneLike -> oneLike.getId() == id).collect(Collectors.toList()).get(0);
     }
 }

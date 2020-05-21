@@ -55,7 +55,7 @@ public class MessageDAO implements DAO<Message> {
 
     @Override
     public Message get(int id) {
-        return stream()
+        return messages.stream()
                 .filter(oneMessage -> oneMessage.getId() == id)
                 .collect(Collectors.toList()).get(0);
     }

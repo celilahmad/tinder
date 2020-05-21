@@ -80,7 +80,7 @@ public class UserDAO implements DAO<User> {
 
     @Override
     public User get(int id) {
-        return stream().filter(oneUser -> oneUser.getId() == id).collect(Collectors.toList()).get(0);
+        return users.stream().filter(oneUser -> oneUser.getId() == id).collect(Collectors.toList()).get(0);
     }
 
     @Override
