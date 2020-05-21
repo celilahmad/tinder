@@ -16,8 +16,8 @@ import java.nio.file.Paths;
 public class LoginServlet extends HttpServlet {
     private LoginService loginService;
 
-    public LoginServlet(LoginService loginService) {
-        this.loginService = loginService;
+    public LoginServlet() {
+        loginService = new LoginService();
     }
 
     @Override

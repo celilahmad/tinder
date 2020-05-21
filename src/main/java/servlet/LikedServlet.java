@@ -16,8 +16,8 @@ public class LikedServlet extends HttpServlet {
     private int localId;
     private LikedService service;
 
-    public LikedServlet(LikedService service) {
-        this.service = service;
+    public LikedServlet() {
+        service = new LikedService();
     }
 
     @Override

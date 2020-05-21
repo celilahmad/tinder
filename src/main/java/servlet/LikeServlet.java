@@ -15,8 +15,8 @@ public class LikeServlet extends HttpServlet {
     private LikeService service;
     private User user;
 
-    public LikeServlet(LikeService service) {
-        this.service = service;
+    public LikeServlet() {
+        service = new LikeService();
         user = service.getFirst();
     }
 
