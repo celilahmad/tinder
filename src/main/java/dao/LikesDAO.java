@@ -26,8 +26,8 @@ public class LikesDAO implements DAO<Like> {
         likes = new LinkedList<>();
         try {
             Connection conn = DbConnection.getConnection();
-            final String SQLQ = "SELECT * FROM likes";
-            PreparedStatement preparedStatement = conn.prepareStatement(SQLQ);
+            final String SQL = "SELECT * FROM likes";
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 likes.add(new Like(
@@ -51,21 +51,13 @@ public class LikesDAO implements DAO<Like> {
         return likes.stream().map(Like::getId).collect(Collectors.toCollection(LinkedList::new));
     }
 
-    @Override
-    public void clear() throws SQLException {
-        Connection conn = DbConnection.getConnection();
-        final String SQLQ = "DELETE  FROM likes";
-        PreparedStatement preparedStatement = conn.prepareStatement(SQLQ);
-        preparedStatement.executeUpdate();
-        likes = new LinkedList<>();
-    }
 
     @Override
     public void add(Like like) {
         try {
             Connection conn = DbConnection.getConnection();
-            final String SQLQ = "INSERT INTO likes (user_likes, user_liked) values (?,?)";
-            PreparedStatement insertLikes = conn.prepareStatement(SQLQ);
+            final String SQL = "INSERT INTO likes (user_likes, user_liked) values (?,?)";
+            PreparedStatement insertLikes = conn.prepareStatement(SQL);
             insertLikes.setInt(1, like.getUser_likes());
             insertLikes.setInt(2, like.getUser_liked());
             insertLikes.executeUpdate();

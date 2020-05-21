@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class UserDAO implements DAO<User> {
     private List<User> users;
 
     public UserDAO() {
+        users = new ArrayList<>();
         read();
     }
 
@@ -25,8 +27,8 @@ public class UserDAO implements DAO<User> {
         users = new LinkedList<>();
         try {
             Connection conn = DbConnection.getConnection();
-            final String SQLQ = "SELECT * FROM users";
-            PreparedStatement preparedStatement = conn.prepareStatement(SQLQ);
+            final String SQL = "SELECT * FROM users";
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 users.add(new User(resultSet.getInt("id"), resultSet.getString("email"),
@@ -52,21 +54,13 @@ public class UserDAO implements DAO<User> {
         return result;
     }
 
-    @Override
-    public void clear() throws SQLException {
-        Connection connection = DbConnection.getConnection();
-        final String SQLQ = "DELETE FROM users";
-        PreparedStatement preparedStatement = connection.prepareStatement(SQLQ);
-        preparedStatement.executeUpdate();
-        users = new LinkedList<>();
-    }
 
     @Override
     public void add(User user) {
         try {
             Connection conn = DbConnection.getConnection();
-            final String SQLQ = "INSERT INTO users (email, password, username, job, imgurl) values (?,?,?,?,?)";
-            PreparedStatement insertUser = conn.prepareStatement(SQLQ);
+            final String SQL = "INSERT INTO users (email, password, username, job, imgurl) values (?,?,?,?,?)";
+            PreparedStatement insertUser = conn.prepareStatement(SQL);
             insertUser.setString(1, user.getEmail());
             insertUser.setString(2, user.getPassword());
             insertUser.setString(3, user.getUsername());

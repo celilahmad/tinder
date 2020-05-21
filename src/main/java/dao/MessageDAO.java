@@ -18,17 +18,16 @@ public class MessageDAO implements DAO<Message> {
     private List<Message> messages;
 
     public MessageDAO() {
-        this.messages = new ArrayList<>();
         read();
     }
 
     @Override
     public void read() {
-        messages = new LinkedList<>();
+        messages = new ArrayList<>();
         try {
             Connection conn = DbConnection.getConnection();
-            final String SQLQ = "SELECT * FROM message";
-            PreparedStatement preparedStatement = conn.prepareStatement(SQLQ);
+            final String SQL = "SELECT * FROM message";
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
                 messages.add(new Message(
@@ -61,21 +60,13 @@ public class MessageDAO implements DAO<Message> {
                 .collect(Collectors.toList()).get(0);
     }
 
-    @Override
-    public void clear() throws SQLException {
-        Connection conn = DbConnection.getConnection();
-        final String SQLQ = "DELETE FROM message";
-        PreparedStatement preparedStatement = conn.prepareStatement(SQLQ);
-        preparedStatement.executeUpdate();
-        messages = new LinkedList<>();
-    }
 
     @Override
     public void add(Message message) {
         try {
             Connection conn = DbConnection.getConnection();
-            final String SQLQ = "INSERT INTO message (user_from, user_to, message, localId, datetime) values (?,?,?,?,?)";
-            PreparedStatement insertMessage = conn.prepareStatement(SQLQ);
+            final String SQL = "INSERT INTO message (user_from, user_to, message, localId, datetime) values (?,?,?,?,?)";
+            PreparedStatement insertMessage = conn.prepareStatement(SQL);
             insertMessage.setInt(1, message.getUserFrom());
             insertMessage.setInt(2, message.getUserTo());
             insertMessage.setString(3, message.getMessage());
