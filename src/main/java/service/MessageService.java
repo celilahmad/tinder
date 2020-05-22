@@ -29,13 +29,14 @@ public class MessageService {
                 .orElse(0);
     }
 
-    private String convertToSenderMessage(Message message) {
+    private String senderMessage(Message message) {
         return "<li class=\"send-msg float-right mb-2\"><p class=\"pt-1 pb-1 pl-2 pr-2 m-0 rounded\">" +
                 message.getMessage() +
                 "</p><span class=\"receive-msg-time\">" + message.getDateTime() + "</li><br>";
     }
 
-    private String convertToReceiverMessage(Message message, String profileURL) {
+
+    private String receiverMessage(Message message, String profileURL) {
         return "<li class=\"receive-msg float-left mb-2\"><div class=\"sender-img\"> <img src=\""
                 + profileURL +
                 "\" class=\"float-left\"></div><div class=\"receive-msg-desc float-left ml-2\"><p class=\"bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded\">"
@@ -69,9 +70,10 @@ public class MessageService {
         return messages.stream()
                 .map(oneMessage -> {
                     if (oneMessage.getUserTo() == receiver && oneMessage.getUserFrom() == sender)
-                        return convertToSenderMessage(oneMessage);
+                        return senderMessage(oneMessage);
                     else
-                        return convertToReceiverMessage(oneMessage, receiverUser.getImgURL());
+                        return receiverMessage(oneMessage, receiverUser.getImgURL());
                 }).collect(Collectors.toList());
     }
 }
+

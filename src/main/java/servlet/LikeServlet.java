@@ -20,6 +20,8 @@ public class LikeServlet extends HttpServlet {
         user = service.getFirst();
     }
 
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Cookie[] cookies = req.getCookies();
