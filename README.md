@@ -1,1 +1,1 @@
-# tinder-project by : Jalil Ahmadov, Allahsukur Mirzazade, Timur Huseynov
+**Tinder-Project by** : Jalil Ahmadov, Allahsukur Mirzazade, Timur Huseynov
