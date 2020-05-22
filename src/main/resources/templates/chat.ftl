@@ -58,6 +58,7 @@
                         <#list messages as message>
 
                             ${message}
+
                         </#list>
                     </ul>
                 </div>
